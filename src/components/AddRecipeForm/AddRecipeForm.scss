@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+#submit_button {
+  float: right;
+}
+
+.add_button {
+  float: right;
+}
+
+.delete_button {
+  float: right;
+  margin-right: 24px;
+  margin-top: 5px;
+}
