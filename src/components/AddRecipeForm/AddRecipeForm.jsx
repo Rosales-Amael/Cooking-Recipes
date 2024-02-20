@@ -427,7 +427,11 @@ function AddRecipeForm() {
       </Flex>
 
       {/* INGREDIENT MODAL */}
-      <Modal isOpen={isIngredientModalOpen} onClose={onIngredientModalClose}>
+      <Modal
+        isOpen={isIngredientModalOpen}
+        onClose={onIngredientModalClose}
+        id="mymodal"
+      >
         <ModalOverlay />
 
         <ModalContent>

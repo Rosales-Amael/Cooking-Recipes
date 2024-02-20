@@ -1,0 +1,17 @@
+.main_title {
+  font-size: 1.8rem;
+  font-family: sans-serif;
+}
+#login_container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  #forgot_password_text {
+    font-size: 14px;
+  }
+
+  #forgot_password_text:hover {
+    text-decoration: underline;
+  }
+}
