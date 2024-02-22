@@ -3,6 +3,8 @@ import Navbar from '../Navbar/Navbar';
 import './Home.scss';
 import AddRecipeForm from '../AddRecipeForm/AddRecipeForm';
 import LoginForm from '../LoginForm/LoginForm';
+import RegisterForm from '../RegisterForm/RegisterForm';
+import Profil from '../Profil/Profil';
 
 function Home() {
   return (
@@ -11,6 +13,8 @@ function Home() {
       <Routes>
         <Route path="/creer-une-recette" element={<AddRecipeForm />} />
         <Route path="/connexion" element={<LoginForm />} />
+        <Route path="/cree-mon-compte" element={<RegisterForm />} />
+        <Route path="/profil" element={<Profil />} />
       </Routes>
     </div>
   );

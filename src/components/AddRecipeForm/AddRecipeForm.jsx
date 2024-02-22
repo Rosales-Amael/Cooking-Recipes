@@ -25,12 +25,7 @@ import {
   Textarea,
   IconButton,
 } from '@chakra-ui/react';
-import {
-  DeleteIcon,
-  PlusSquareIcon,
-  SearchIcon,
-  AddIcon,
-} from '@chakra-ui/icons';
+import { DeleteIcon, AddIcon } from '@chakra-ui/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import SelectComponent from '../SelectComponent/SelectComponent';
 import './AddRecipeForm.scss';
@@ -245,24 +240,26 @@ function AddRecipeForm() {
 
   return (
     <>
-      <Flex justifyContent="center" my={5}>
-        <Box borderRadius="md" w="90%" p={4} color="black">
+      <Flex justifyContent="center">
+        <Box borderRadius="md" w="70%" p={4} color="black" mt={20}>
           <Center fontSize="3xl" mb={3}>
             Créer une recette
           </Center>
 
           {/* TITLE */}
-          <FormControl mb={4} isRequired>
-            <FormLabel>Titre</FormLabel>
-            <Input
-              type="text"
-              placeholder="Pancakes délicieux"
-              value={titleValue}
-              onChange={(e) => {
-                dispatch(changeTitle(e.target.value));
-              }}
-            />
-          </FormControl>
+          <Flex>
+            <FormControl mb={4} isRequired>
+              <FormLabel>Titre</FormLabel>
+              <Input
+                type="text"
+                placeholder="Pancakes délicieux"
+                value={titleValue}
+                onChange={(e) => {
+                  dispatch(changeTitle(e.target.value));
+                }}
+              />
+            </FormControl>
+          </Flex>
           {/* SELECTED COMPONENTS */}
           <Flex>
             <FormControl mr={4} isRequired>
@@ -296,7 +293,7 @@ function AddRecipeForm() {
 
           {/* INGREDIENT TABLE */}
           <TableContainer mt={5}>
-            <Table variant="simple">
+            <Table variant="striped">
               <Thead>
                 <Tr>
                   <Th>Ingrédient(s)</Th>

@@ -1,0 +1,39 @@
+.profil_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.profil_box {
+  width: 80%;
+  position: relative;
+}
+
+.avatar_container {
+  position: relative;
+  .edit_icon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}
+
+.box_accordion {
+  width: 80%;
+  margin-bottom: 100px;
+}
+
+#delete_account_button {
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+}
+
+@media screen and (max-width: 1080px) {
+  .profil_box {
+    width: 95%;
+  }
+  .box_accordion {
+    width: 100%;
+  }
+}

@@ -1,0 +1,32 @@
+.card {
+  position: relative;
+}
+
+.card_footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tags_container {
+  flex-wrap: wrap;
+}
+
+.tags {
+  margin-bottom: 8px;
+  margin-right: 5px;
+}
+
+.tag_icons {
+  margin-right: 5px;
+}
+
+#favorite_icon {
+  color: rgb(255, 22, 61);
+  float: right;
+}
+
+@media screen and (max-width: 370px) {
+  #grid_cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}

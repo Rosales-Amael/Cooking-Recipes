@@ -1,2 +1,39 @@
-.home {
+#user_form {
+  width: 30%;
+}
+
+@media screen and (max-width: 1440px) {
+  #user_form {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 1060px) {
+  #user_form {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #user_form {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #user_form {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #user_form {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #user_form {
+    width: 90%;
+  }
 }

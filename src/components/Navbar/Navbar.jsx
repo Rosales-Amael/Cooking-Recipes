@@ -29,9 +29,10 @@ function Navbar() {
     <Box
       bg={useColorModeValue('gray.100', 'gray.900')}
       px={4}
-      position="absolute"
+      position="relative"
       left="0"
       right="0"
+      top="0"
     >
       <Flex h={16} alignItems="center" justifyContent="space-between">
         <IconButton
