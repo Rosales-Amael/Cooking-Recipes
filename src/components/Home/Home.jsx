@@ -5,6 +5,7 @@ import AddRecipeForm from '../AddRecipeForm/AddRecipeForm';
 import LoginForm from '../LoginForm/LoginForm';
 import RegisterForm from '../RegisterForm/RegisterForm';
 import Profil from '../Profil/Profil';
+import RecipeDetails from '../RecipeDetails/RecipeDetails';
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
         <Route path="/connexion" element={<LoginForm />} />
         <Route path="/cree-mon-compte" element={<RegisterForm />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="/details-recette/1" element={<RecipeDetails />} />
       </Routes>
     </div>
   );

@@ -26,6 +26,7 @@ import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Rating from '@mui/material/Rating';
 import './SavedRecipes.scss';
+import { Link } from 'react-router-dom';
 
 function SavedRecipes() {
   return (
@@ -54,19 +55,19 @@ function SavedRecipes() {
                 </CardHeader>
                 <CardBody>
                   <Flex className="tags_container">
-                    <Badge bg="info" className="tags">
+                    <Badge bg="primary" className="tags">
                       <AccessTimeIcon className="tag_icons" />
                       10 - 15min
                     </Badge>
-                    <Badge bg="info" className="tags">
+                    <Badge bg="primary" className="tags">
                       <MenuBookIcon className="tag_icons" />
                       Facile
                     </Badge>
-                    <Badge bg="info" className="tags">
+                    <Badge bg="primary" className="tags">
                       <RestaurantIcon className="tag_icons" />
                       Dessert
                     </Badge>
-                    <Badge bg="info" className="tags">
+                    <Badge bg="primary" className="tags">
                       <PeopleAltIcon className="tag_icons" />4 Pers.
                     </Badge>
                   </Flex>
@@ -88,9 +89,9 @@ function SavedRecipes() {
                   </Carousel>
 
                   <Flex mt={2}>
-                    <Avatar src="/src/assets/images/mogi.jpg" />
+                    <Avatar src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" />
                     <Box ml="3" position="relative">
-                      <Text fontWeight="bold">Bébé</Text>
+                      <Text fontWeight="bold">Stupid guy</Text>
                       <Rating size="small" defaultValue={4} readOnly />
                     </Box>
                   </Flex>
@@ -101,7 +102,9 @@ function SavedRecipes() {
                     isRound={true}
                     icon={<FavoriteIcon id="favorite_icon" />}
                   />
-                  <Button>Voir</Button>
+                  <Link to="/details-recette/1">
+                    <Button>Voir</Button>
+                  </Link>
                 </CardFooter>
               </Card>
             </SimpleGrid>

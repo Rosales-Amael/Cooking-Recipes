@@ -11,3 +11,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.tags_container {
+  flex-wrap: wrap;
+}
+
+.tags {
+  margin-bottom: 8px;
+  margin-right: 5px;
+}
+
+.tag_icons {
+  margin-right: 8px;
+}
+
+.main_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.main_box {
+  width: 80%;
+  position: relative;
+}
+
+@media screen and (max-width: 1080px) {
+  .main_box {
+    width: 95%;
+  }
+}

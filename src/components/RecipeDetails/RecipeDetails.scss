@@ -1,0 +1,38 @@
+#recipe_details_box {
+  width: 70%;
+}
+
+.tags_container {
+  margin: 10px 0 50px;
+}
+
+.recipe_icons_section {
+  margin-right: 5px;
+  margin-top: 3px;
+}
+
+.list {
+  margin: 20px 0 20px;
+}
+
+#number_ratings {
+  position: absolute;
+  top: 7px;
+  right: 0;
+}
+
+#recipe_details_favorite_icon {
+  color: rgb(255, 22, 61);
+}
+
+@media screen and (max-width: 1440px) {
+  #recipe_details_box {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  #recipe_details_box {
+    width: 90%;
+  }
+}

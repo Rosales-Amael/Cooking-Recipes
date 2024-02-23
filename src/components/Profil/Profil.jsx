@@ -60,10 +60,10 @@ function Profil() {
             py={2}
           >
             <Accordion allowToggle>
-              <AccordionItem>
+              <AccordionItem p={4}>
                 <PersoInfo />
               </AccordionItem>
-              <AccordionItem>
+              <AccordionItem p={4}>
                 <SavedRecipes />
               </AccordionItem>
             </Accordion>
