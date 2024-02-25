@@ -20,6 +20,7 @@ import {
 import Badge from 'react-bootstrap/Badge';
 import Carousel from 'react-bootstrap/Carousel';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
@@ -27,8 +28,10 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Rating from '@mui/material/Rating';
 import './SavedRecipes.scss';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 function SavedRecipes() {
+  const [isRecipeLiked, setRecipeLiked] = useState(true);
   return (
     <>
       <h2>
@@ -98,9 +101,18 @@ function SavedRecipes() {
                 </CardBody>
                 <CardFooter className="card_footer">
                   <IconButton
+                    onClick={() => {
+                      setRecipeLiked(!isRecipeLiked);
+                    }}
                     // eslint-disable-next-line react/jsx-boolean-value
                     isRound={true}
-                    icon={<FavoriteIcon id="favorite_icon" />}
+                    icon={
+                      isRecipeLiked ? (
+                        <FavoriteIcon id="favorite_icon" />
+                      ) : (
+                        <FavoriteBorder id="favorite_icon" />
+                      )
+                    }
                   />
                   <Link to="/details-recette/1">
                     <Button>Voir la recette</Button>

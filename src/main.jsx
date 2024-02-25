@@ -18,7 +18,7 @@ root.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <BrowserRouter>
-        <ChakraProvider>
+        <ChakraProvider toastOptions={{ defaultOptions: { position: 'top' } }}>
           <App />
         </ChakraProvider>
       </BrowserRouter>

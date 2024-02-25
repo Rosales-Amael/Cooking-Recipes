@@ -12,6 +12,14 @@ code {
     monospace;
 }
 
+.navbar {
+  width: 80%;
+  margin: 15px auto 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
 .tags_container {
   flex-wrap: wrap;
 }
@@ -28,10 +36,10 @@ code {
 .main_container {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
 }
 
 .main_box {
+  margin-top: 100px;
   width: 80%;
   position: relative;
 }

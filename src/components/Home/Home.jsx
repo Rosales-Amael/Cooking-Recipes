@@ -26,13 +26,9 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Rating from '@mui/material/Rating';
+import { Spinner } from 'react-bootstrap';
 
 import './Home.scss';
-import AddRecipeForm from '../AddRecipeForm/AddRecipeForm';
-import LoginForm from '../LoginForm/LoginForm';
-import RegisterForm from '../RegisterForm/RegisterForm';
-import Profil from '../Profil/Profil';
-import RecipeDetails from '../RecipeDetails/RecipeDetails';
 
 function Home() {
   return (

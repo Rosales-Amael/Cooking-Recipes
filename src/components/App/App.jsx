@@ -6,6 +6,7 @@ import RegisterForm from '../RegisterForm/RegisterForm';
 import Profil from '../Profil/Profil';
 import RecipeDetails from '../RecipeDetails/RecipeDetails';
 import Home from '../Home/Home';
+import Search from '../Search/Search';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/cree-mon-compte" element={<RegisterForm />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/details-recette/1" element={<RecipeDetails />} />
+        <Route path="/recherche" element={<Search />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </div>

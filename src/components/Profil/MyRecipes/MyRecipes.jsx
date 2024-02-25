@@ -16,6 +16,7 @@ import {
   IconButton,
   Center,
   Avatar,
+  useToast,
 } from '@chakra-ui/react';
 import Badge from 'react-bootstrap/Badge';
 import Carousel from 'react-bootstrap/Carousel';
@@ -27,8 +28,12 @@ import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Rating from '@mui/material/Rating';
 import './MyRecipes.scss';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { FavoriteBorder } from '@mui/icons-material';
 
 function MyRecipes() {
+  const toast = useToast();
+  const [isRecipeLiked, setRecipeLiked] = useState(false);
   return (
     <>
       <h2>
@@ -92,7 +97,32 @@ function MyRecipes() {
                   <IconButton
                     // eslint-disable-next-line react/jsx-boolean-value
                     isRound={true}
-                    icon={<FavoriteIcon id="favorite_icon" />}
+                    onClick={() => {
+                      setRecipeLiked(!isRecipeLiked);
+                      if (isRecipeLiked) {
+                        toast.closeAll();
+                      }
+                      if (!isRecipeLiked) {
+                        toast({
+                          title: 'Recette enregistrée',
+                          description: 'Miam !!!',
+                          status: 'success',
+                          variant: 'subtle',
+                          containerStyle: {
+                            marginTop: '130px',
+                          },
+                          duration: 5000,
+                          isClosable: true,
+                        });
+                      }
+                    }}
+                    icon={
+                      isRecipeLiked ? (
+                        <FavoriteIcon id="favorite_icon" />
+                      ) : (
+                        <FavoriteBorder id="favorite_icon" />
+                      )
+                    }
                   />
                   <Link to="/details-recette/1">
                     <Button>Voir la recette</Button>

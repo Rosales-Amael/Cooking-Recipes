@@ -25,6 +25,7 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
+  useToast,
 } from '@chakra-ui/react';
 import Badge from 'react-bootstrap/Badge';
 import { Rating } from '@mui/material';
@@ -45,6 +46,7 @@ import { useRef, useState } from 'react';
 import { DeleteIcon } from '@chakra-ui/icons';
 
 function RecipeDetails() {
+  const toast = useToast();
   const cancelRef = useRef();
   const {
     isOpen: isRatingModalOpen,
@@ -59,6 +61,7 @@ function RecipeDetails() {
   } = useDisclosure();
 
   const [isRecipeBelongToUser, setRecipeBelongToUser] = useState(true);
+  const [isRecipeLiked, setRecipeLiked] = useState(false);
 
   return (
     <Flex className="main_container">
@@ -84,9 +87,34 @@ function RecipeDetails() {
             position="relative"
           >
             <IconButton
+              onClick={() => {
+                setRecipeLiked(!isRecipeLiked);
+                if (isRecipeLiked) {
+                  toast.closeAll();
+                }
+                if (!isRecipeLiked) {
+                  toast({
+                    title: 'Recette enregistrée',
+                    description: 'Rendez-vous sur votre profil !',
+                    status: 'success',
+                    variant: 'subtle',
+                    containerStyle: {
+                      marginTop: '130px',
+                    },
+                    duration: 5000,
+                    isClosable: true,
+                  });
+                }
+              }}
               // eslint-disable-next-line react/jsx-boolean-value
               isRound={true}
-              icon={<FavoriteBorderIcon id="recipe_details_favorite_icon" />}
+              icon={
+                isRecipeLiked ? (
+                  <FavoriteIcon id="recipe_details_favorite_icon" />
+                ) : (
+                  <FavoriteBorderIcon id="recipe_details_favorite_icon" />
+                )
+              }
             />
             <Rating size="medium" defaultValue={4} readOnly />
             <Text id="number_ratings">(4)</Text>

@@ -28,6 +28,7 @@ function Profil() {
     <Flex className="main_container">
       <Box
         className="main_box"
+        id="recipe_details_box"
         boxShadow="xl"
         borderRadius="md"
         bg="gray.100"
