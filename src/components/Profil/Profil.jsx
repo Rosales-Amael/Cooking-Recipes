@@ -19,14 +19,15 @@ import { EditIcon } from '@chakra-ui/icons';
 import PersoInfo from './PersoInfo/PersoInfo';
 import './Profil.scss';
 import SavedRecipes from './SavedRecipes/SavedRecipes';
+import MyRecipes from './MyRecipes/MyRecipes';
 
 function Profil() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
   return (
-    <Flex className="profil_container">
+    <Flex className="main_container">
       <Box
-        className="profil_box"
+        className="main_box"
         boxShadow="xl"
         borderRadius="md"
         bg="gray.100"
@@ -62,6 +63,9 @@ function Profil() {
             <Accordion allowToggle>
               <AccordionItem p={4}>
                 <PersoInfo />
+              </AccordionItem>
+              <AccordionItem p={4}>
+                <MyRecipes />
               </AccordionItem>
               <AccordionItem p={4}>
                 <SavedRecipes />

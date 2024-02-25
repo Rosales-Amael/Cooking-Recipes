@@ -16,27 +16,9 @@ const initialState = {
   category: '',
   difficulty: '',
   duration: '',
-  ingredientsList: [
-    {
-      id: 1,
-      name: 'Poivron',
-      quantity: '1',
-      unitValue: 'unit',
-      unitText: 'Unitée',
-    },
-  ],
-  stepsList: [
-    {
-      id: 1,
-      description: 'Coupez les poivrons en tranches',
-    },
-  ],
-  utensilsList: [
-    {
-      id: 1,
-      name: 'Couteau',
-    },
-  ],
+  ingredientsList: [],
+  stepsList: [],
+  utensilsList: [],
 };
 
 const addRecipeReducer = (state = initialState, action = {}) => {

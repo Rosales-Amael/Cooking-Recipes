@@ -293,7 +293,7 @@ function AddRecipeForm() {
 
           {/* INGREDIENT TABLE */}
           <TableContainer mt={5}>
-            <Table variant="striped">
+            <Table>
               <Thead>
                 <Tr>
                   <Th>Ingrédient(s)</Th>
@@ -427,7 +427,7 @@ function AddRecipeForm() {
       <Modal
         isOpen={isIngredientModalOpen}
         onClose={onIngredientModalClose}
-        id="mymodal"
+        id="modals"
       >
         <ModalOverlay />
 
@@ -484,7 +484,7 @@ function AddRecipeForm() {
       </Modal>
 
       {/* STEPS MODAL */}
-      <Modal isOpen={isStepsModalOpen} onClose={onStepsModalClose}>
+      <Modal isOpen={isStepsModalOpen} onClose={onStepsModalClose} id="modals">
         <ModalOverlay />
         <ModalContent>
           <form onSubmit={handleSubmitStep}>
@@ -516,7 +516,11 @@ function AddRecipeForm() {
       </Modal>
 
       {/* UTENSILS MODAL */}
-      <Modal isOpen={isUtensilsModalOpen} onClose={onUtensilsModalClose}>
+      <Modal
+        isOpen={isUtensilsModalOpen}
+        onClose={onUtensilsModalClose}
+        id="modals"
+      >
         <ModalOverlay />
         <ModalContent>
           <form onSubmit={handleSubmitUtensil}>

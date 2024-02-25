@@ -25,16 +25,16 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import Rating from '@mui/material/Rating';
-import './SavedRecipes.scss';
+import './MyRecipes.scss';
 import { Link } from 'react-router-dom';
 
-function SavedRecipes() {
+function MyRecipes() {
   return (
     <>
       <h2>
         <AccordionButton bg="telegram">
           <Box as="span" flex="1" textAlign="left">
-            Recettes enregistrées
+            Mes recettes
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -87,14 +87,6 @@ function SavedRecipes() {
                       />
                     </Carousel.Item>
                   </Carousel>
-
-                  <Flex mt={2}>
-                    <Avatar src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" />
-                    <Box ml="3" position="relative">
-                      <Text fontWeight="bold">Stupid guy</Text>
-                      <Rating size="small" defaultValue={4} readOnly />
-                    </Box>
-                  </Flex>
                 </CardBody>
                 <CardFooter className="card_footer">
                   <IconButton
@@ -115,4 +107,4 @@ function SavedRecipes() {
   );
 }
 
-export default SavedRecipes;
+export default MyRecipes;

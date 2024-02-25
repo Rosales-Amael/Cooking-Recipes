@@ -39,10 +39,27 @@ import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
 import MicrowaveIcon from '@mui/icons-material/Microwave';
 import Carousel from 'react-bootstrap/Carousel';
 import ListGroup from 'react-bootstrap/ListGroup';
+
 import './RecipeDetails.scss';
+import { useRef, useState } from 'react';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 function RecipeDetails() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = useRef();
+  const {
+    isOpen: isRatingModalOpen,
+    onOpen: onRatingModalOpen,
+    onClose: onRatingModalClose,
+  } = useDisclosure();
+
+  const {
+    isOpen: isDeleteModalOpen,
+    onOpen: onDeleteModalOpen,
+    onClose: onDeleteModalClose,
+  } = useDisclosure();
+
+  const [isRecipeBelongToUser, setRecipeBelongToUser] = useState(true);
+
   return (
     <Flex className="main_container">
       <Box
@@ -150,19 +167,47 @@ function RecipeDetails() {
             <ListGroup.Item as="li">Poelle</ListGroup.Item>
           </ListGroup>
           <Flex mt={2} alignItems="center" justifyContent="space-between">
-            <div>
-              <Flex alignItems="center">
-                <Avatar src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" />
-                <Text fontWeight="bold" ml={3}>
-                  Stupid guy
-                </Text>
-              </Flex>
-            </div>
+            {isRecipeBelongToUser ? (
+              <>
+                <div>
+                  <Flex alignItems="center">
+                    <IconButton
+                      colorScheme="red"
+                      className="delete_button"
+                      size="sm"
+                      onClick={onDeleteModalOpen}
+                      icon={<DeleteIcon />}
+                    />
+                  </Flex>
+                </div>
 
-            <Button colorScheme="teal" onClick={onOpen}>
-              Noter la recette
-            </Button>
-            <Modal isOpen={isOpen} onClose={onClose}>
+                <Button colorScheme="teal" onClick={onRatingModalOpen}>
+                  Modifier la recette
+                </Button>
+              </>
+            ) : (
+              <>
+                <div>
+                  <Flex alignItems="center">
+                    <Avatar src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" />
+                    <Text fontWeight="bold" ml={3}>
+                      Stupid guy
+                    </Text>
+                  </Flex>
+                </div>
+
+                <Button colorScheme="teal" onClick={onRatingModalOpen}>
+                  Noter la recette
+                </Button>
+              </>
+            )}
+
+            {/* RATING MODAL */}
+            <Modal
+              isOpen={isRatingModalOpen}
+              onClose={onRatingModalClose}
+              id="modals"
+            >
               <ModalOverlay />
               <ModalContent>
                 <ModalHeader>Noter la recette : Pancakes</ModalHeader>
@@ -172,15 +217,50 @@ function RecipeDetails() {
                 </ModalBody>
 
                 <ModalFooter>
-                  <Button variant="ghost" mr={2} onClick={onClose}>
+                  <Button variant="ghost" mr={2} onClick={onRatingModalClose}>
                     Annuler
                   </Button>
-                  <Button colorScheme="blue" mr={3} onClick={onClose}>
+                  <Button
+                    colorScheme="blue"
+                    mr={3}
+                    onClick={onRatingModalClose}
+                  >
                     Noter
                   </Button>
                 </ModalFooter>
               </ModalContent>
             </Modal>
+
+            {/* DELETE ALERT */}
+            <AlertDialog
+              isOpen={isDeleteModalOpen}
+              leastDestructiveRef={cancelRef}
+              onClose={onDeleteModalClose}
+            >
+              <AlertDialogOverlay>
+                <AlertDialogContent>
+                  <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                    Supprimer la recette
+                  </AlertDialogHeader>
+
+                  <AlertDialogBody>
+                    Vous allez supprimer la recette. Êtes-vous sur de vouloir
+                    continuer ?
+                  </AlertDialogBody>
+
+                  <AlertDialogFooter>
+                    <Button onClick={onDeleteModalClose}>Annuler</Button>
+                    <Button
+                      colorScheme="red"
+                      onClick={onDeleteModalClose}
+                      ml={3}
+                    >
+                      Supprimer
+                    </Button>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
           </Flex>
         </Container>
       </Box>

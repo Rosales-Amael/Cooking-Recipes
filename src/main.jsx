@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import Home from './components/Home/Home';
+import App from './components/App/App';
 import store from './store';
 
 import './styles/index.scss';
@@ -19,7 +19,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <ChakraProvider>
-          <Home />
+          <App />
         </ChakraProvider>
       </BrowserRouter>
     </Provider>
