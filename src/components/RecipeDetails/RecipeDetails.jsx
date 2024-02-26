@@ -44,6 +44,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import './RecipeDetails.scss';
 import { useRef, useState } from 'react';
 import { DeleteIcon } from '@chakra-ui/icons';
+import { Link } from 'react-router-dom';
 
 function RecipeDetails() {
   const toast = useToast();
@@ -209,9 +210,11 @@ function RecipeDetails() {
                   </Flex>
                 </div>
 
-                <Button colorScheme="teal" onClick={onRatingModalOpen}>
-                  Modifier la recette
-                </Button>
+                <Link to="/modifier/pancakes/2">
+                  <Button colorScheme="teal" onClick={onRatingModalOpen}>
+                    Modifier la recette
+                  </Button>
+                </Link>
               </>
             ) : (
               <>

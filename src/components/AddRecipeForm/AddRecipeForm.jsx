@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import {
   Box,
@@ -48,7 +49,7 @@ import {
   unitsOptions,
 } from '../../utils/selectOptions';
 
-function AddRecipeForm() {
+function AddRecipeForm({ isFormIsEdit }) {
   const dispatch = useDispatch();
 
   const titleValue = useSelector((state) => state.addRecipe.title);
@@ -446,5 +447,8 @@ function AddRecipeForm() {
     </>
   );
 }
+AddRecipeForm.propTypes = {
+  isFormIsEdit: PropTypes.bool.isRequired,
+};
 
 export default AddRecipeForm;

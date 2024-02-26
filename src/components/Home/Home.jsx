@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -13,7 +13,6 @@ import {
   IconButton,
   Center,
   Avatar,
-  Container,
   SimpleGrid,
   Divider,
 } from '@chakra-ui/react';
