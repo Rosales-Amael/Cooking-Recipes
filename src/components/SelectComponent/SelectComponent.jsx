@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import { Select } from '@chakra-ui/react';
 import './SelectComponent.scss';
@@ -5,6 +6,7 @@ import { useDispatch } from 'react-redux';
 
 function SelectComponent({ options, changeValue, changeText, placeholder }) {
   const dispatch = useDispatch();
+
   return (
     <div>
       <Select

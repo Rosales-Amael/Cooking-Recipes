@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import { Link, Route, Routes } from 'react-router-dom';
 import {

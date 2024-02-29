@@ -1,4 +1,9 @@
-import { useRef } from 'react';
+/* eslint-disable import/no-duplicates */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { styled } from '@mui/material/styles';
 import {
   Box,
   Flex,
@@ -7,23 +12,55 @@ import {
   Accordion,
   AccordionItem,
   useDisclosure,
-  Button,
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
   AlertDialogHeader,
   AlertDialogBody,
   AlertDialogFooter,
+  useToast,
 } from '@chakra-ui/react';
-import { EditIcon } from '@chakra-ui/icons';
+import { Fab } from '@mui/material';
+import { Button as ChakraButton } from '@chakra-ui/react';
+import EditIcon from '@mui/icons-material/Edit';
 import PersoInfo from './PersoInfo/PersoInfo';
 import './Profil.scss';
 import SavedRecipes from './SavedRecipes/SavedRecipes';
 import MyRecipes from './MyRecipes/MyRecipes';
+import {
+  avatarChangeStatus,
+  avatarChangeToast,
+  avatarRequest,
+} from '../../actions/avatar';
 
 function Profil() {
+  const dispatch = useDispatch();
+  const toast = useToast();
+  const serverPath = 'http://localhost:8000/storage/';
+  const userState = useSelector((state) => state.user.user);
+  const toastMessage = useSelector((state) => state.avatar.toastMesssage);
+  const status = useSelector((state) => state.avatar.status);
+  console.log(toastMessage);
+  const user = JSON.parse(localStorage.getItem('USER_DATA'));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
+
+  useEffect(() => {}, [userState]);
+
+  useEffect(() => {
+    if (toastMessage && status) {
+      const toastType = status > 204 ? 'error' : 'success';
+      toast({
+        description: toastMessage,
+        status: toastType,
+        duration: 5000,
+        isClosable: true,
+      });
+      dispatch(avatarChangeToast(''));
+      dispatch(avatarChangeStatus(0));
+    }
+  }, [toastMessage, status]);
+
   return (
     <Flex className="main_container">
       <Box
@@ -38,18 +75,36 @@ function Profil() {
         {/* AVATAR */}
         <Flex alignItems="center" flexDirection="column">
           <div className="avatar_container">
-            <Avatar size="2xl" bg="teal.500" />
-            <IconButton
-              // eslint-disable-next-line react/jsx-boolean-value
-              isRound={true}
-              colorScheme="telegram"
-              size="sm"
-              className="edit_icon"
-              icon={<EditIcon color="white" />}
-            />
+            <Avatar size="2xl" bg="teal.500" src={serverPath + user.avatar} />
+            <form
+              id="form_upload_image"
+              action=""
+              encType="multipart/form-data"
+            >
+              <label>
+                <input
+                  style={{ display: 'none' }}
+                  type="file"
+                  onChange={(e) => {
+                    const formData = new FormData();
+                    formData.append('avatar', e.target.files[0]);
+                    dispatch(avatarRequest(formData));
+                  }}
+                />
+                <Fab
+                  color="primary"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  id="upload_button"
+                >
+                  <EditIcon id="upload_button_icon" />
+                </Fab>
+              </label>
+            </form>
           </div>
 
-          <h1>SlimDumbledodge</h1>
+          <h1>{user.name}</h1>
         </Flex>
 
         {/* ACCORDION */}
@@ -75,14 +130,14 @@ function Profil() {
           </Box>
         </Flex>
 
-        <Button
+        <ChakraButton
           size="sm"
           id="delete_account_button"
           colorScheme="red"
           onClick={onOpen}
         >
           Supprimer le compte
-        </Button>
+        </ChakraButton>
         {/* ALERT DELETE ACCOUNT */}
         <AlertDialog
           isOpen={isOpen}
@@ -101,12 +156,12 @@ function Profil() {
               </AlertDialogBody>
 
               <AlertDialogFooter>
-                <Button ref={cancelRef} onClick={onClose}>
+                <ChakraButton ref={cancelRef} onClick={onClose}>
                   Annuler
-                </Button>
-                <Button colorScheme="red" onClick={onClose} ml={3}>
+                </ChakraButton>
+                <ChakraButton colorScheme="red" onClick={onClose} ml={3}>
                   Supprimer
-                </Button>
+                </ChakraButton>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialogOverlay>

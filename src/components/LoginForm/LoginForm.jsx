@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Flex,
@@ -5,22 +7,29 @@ import {
   Center,
   FormControl,
   FormLabel,
+  FormErrorMessage,
   Input,
   Divider,
   AbsoluteCenter,
   useToast,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginForm.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeLoginEmail, changeLoginPassword } from '../../actions/login';
+import {
+  changeLoginEmail,
+  changeLoginPassword,
+  loginRequest,
+} from '../../actions/login';
 
 function LoginForm() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const toast = useToast();
   const emailValue = useSelector((state) => state.login.email);
   const passwordValue = useSelector((state) => state.login.password);
+  const errors = useSelector((state) => state.login.errors);
 
   return (
     <Flex id="login_container">
@@ -28,45 +37,50 @@ function LoginForm() {
         <Center>
           <h1 className="main_title">Connectez-vous</h1>
         </Center>
-        <FormControl mb={4} isRequired>
-          <FormLabel>Email</FormLabel>
-          <Input
-            type="email"
-            placeholder="example@gmail.com"
-            value={emailValue}
-            onChange={(e) => {
-              dispatch(changeLoginEmail(e.target.value));
-            }}
-          />
-        </FormControl>
-
-        <FormControl mb={4} isRequired>
-          <FormLabel>Mot de passe</FormLabel>
-          <Input
-            type="password"
-            value={passwordValue}
-            onChange={(e) => {
-              dispatch(changeLoginPassword(e.target.value));
-            }}
-          />
-        </FormControl>
-        <Button
-          onClick={() => {
-            toast.closeAll();
-            toast({
-              title: 'Email ou Mot de passe incorrect !',
-              status: 'error',
-              duration: 5000,
-              isClosable: true,
-            });
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            dispatch(loginRequest(navigate));
           }}
-          mt={2}
-          w="100%"
-          colorScheme="telegram"
-          rightIcon={<ArrowForwardIcon mt={1} />}
         >
-          Se connecter
-        </Button>
+          <FormControl mb={4} isInvalid={errors.email}>
+            <FormLabel>Email</FormLabel>
+            <Input
+              type="email"
+              placeholder="example@gmail.com"
+              value={emailValue}
+              onChange={(e) => {
+                dispatch(changeLoginEmail(e.target.value));
+              }}
+            />
+            {errors.email && (
+              <FormErrorMessage>{errors.email[0]}</FormErrorMessage>
+            )}
+          </FormControl>
+
+          <FormControl mb={4} isInvalid={errors.password}>
+            <FormLabel>Mot de passe</FormLabel>
+            <Input
+              type="password"
+              value={passwordValue}
+              onChange={(e) => {
+                dispatch(changeLoginPassword(e.target.value));
+              }}
+            />
+            {errors.password && (
+              <FormErrorMessage>{errors.password[0]}</FormErrorMessage>
+            )}
+          </FormControl>
+          <Button
+            type="submit"
+            mt={2}
+            w="100%"
+            colorScheme="telegram"
+            rightIcon={<ArrowForwardIcon mt={1} />}
+          >
+            Se connecter
+          </Button>
+        </form>
 
         <Box position="relative" py="10">
           <Divider id="divider" />

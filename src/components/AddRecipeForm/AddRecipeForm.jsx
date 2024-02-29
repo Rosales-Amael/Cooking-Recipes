@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Flex,
@@ -48,9 +49,16 @@ import {
   durationOptions,
   unitsOptions,
 } from '../../utils/selectOptions';
+import { userGetUser } from '../../actions/user';
 
 function AddRecipeForm({ isFormIsEdit }) {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+  useEffect(() => {
+    if (!user) {
+      dispatch(userGetUser());
+    }
+  }, []);
 
   const titleValue = useSelector((state) => state.addRecipe.title);
   const categoryValue = useSelector((state) => state.addRecipe.category);

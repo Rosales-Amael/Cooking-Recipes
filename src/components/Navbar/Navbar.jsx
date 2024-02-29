@@ -34,12 +34,15 @@ import DinnerDiningIcon from '@mui/icons-material/DinnerDining';
 import IcecreamIcon from '@mui/icons-material/Icecream';
 import LocalDiningIcon from '@mui/icons-material/LocalDining';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutRequest } from '../../actions/logout';
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = localStorage.getItem('USER_DATA');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [placement, setPlacement] = useState('left');
 
   return (
     <Box borderRadius="md">
@@ -73,15 +76,23 @@ function Navbar() {
               <MenuItem>Profil</MenuItem>
             </Link>
             <MenuDivider />
-            <Link to="/connexion">
-              <MenuItem>Se connecter</MenuItem>
-            </Link>
-
-            <MenuItem>Se déconnecter</MenuItem>
+            {!user ? (
+              <Link to="/connexion">
+                <MenuItem>Se connecter</MenuItem>
+              </Link>
+            ) : (
+              <MenuItem
+                onClick={() => {
+                  dispatch(logoutRequest(navigate));
+                }}
+              >
+                Se déconnecter
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
       </Box>
-      <Drawer placement={placement} onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
         <DrawerOverlay />
         <DrawerContent>
           <Flex justifyContent="space-between" alignItems="center">

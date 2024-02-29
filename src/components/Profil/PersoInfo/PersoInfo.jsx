@@ -12,6 +12,7 @@ import {
 import './PersoInfo.scss';
 
 function PersoInfo() {
+  const user = JSON.parse(localStorage.getItem('USER_DATA'));
   return (
     <>
       <h2>

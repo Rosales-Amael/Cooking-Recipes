@@ -11,10 +11,22 @@
 
 .avatar_container {
   position: relative;
-  .edit_icon {
+
+  #form_upload_image {
+    width: 100%;
     position: absolute;
-    bottom: 0;
-    right: 0;
+  }
+
+  #upload_button_icon {
+    width: 18px;
+    color: white;
+  }
+
+  #upload_button {
+    bottom: 30px;
+    right: -90px;
+    width: 35px;
+    height: 0px;
   }
 }
 

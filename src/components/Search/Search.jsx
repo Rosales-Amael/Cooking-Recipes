@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from 'react-router-dom';
 import {
   Box,
@@ -38,6 +39,7 @@ import './Search.scss';
 
 function Search() {
   const isRecipesFounded = true;
+
   return (
     <Flex className="main_container">
       <Box
