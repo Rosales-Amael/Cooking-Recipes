@@ -1,6 +1,7 @@
 /* eslint-disable import/no-duplicates */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
@@ -32,15 +33,24 @@ import {
   avatarChangeToast,
   avatarRequest,
 } from '../../actions/avatar';
+import serverPath from '../../utils/serverPath';
+import {
+  userChangeEditStatus,
+  userChangeEditToastMessage,
+  userDeleteRequest,
+} from '../../actions/user';
 
 function Profil() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const toast = useToast();
-  const serverPath = 'http://localhost:8000/storage/';
+
   const userState = useSelector((state) => state.user.user);
-  const toastMessage = useSelector((state) => state.avatar.toastMesssage);
-  const status = useSelector((state) => state.avatar.status);
-  console.log(toastMessage);
+  const avatarToastMessage = useSelector((state) => state.avatar.toastMesssage);
+  const editToastMessage = useSelector((state) => state.user.editToastMessage);
+  const avatarStatus = useSelector((state) => state.avatar.status);
+  const editStatus = useSelector((state) => state.user.editStatus);
+
   const user = JSON.parse(localStorage.getItem('USER_DATA'));
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef();
@@ -48,10 +58,12 @@ function Profil() {
   useEffect(() => {}, [userState]);
 
   useEffect(() => {
-    if (toastMessage && status) {
-      const toastType = status > 204 ? 'error' : 'success';
+    if (avatarToastMessage && avatarStatus) {
+      const toastType = avatarStatus > 204 ? 'error' : 'success';
+      const title = avatarStatus > 204 ? 'Erreur' : 'Confirmation';
       toast({
-        description: toastMessage,
+        title,
+        description: avatarToastMessage,
         status: toastType,
         duration: 5000,
         isClosable: true,
@@ -59,7 +71,23 @@ function Profil() {
       dispatch(avatarChangeToast(''));
       dispatch(avatarChangeStatus(0));
     }
-  }, [toastMessage, status]);
+  }, [avatarToastMessage, avatarStatus]);
+
+  useEffect(() => {
+    if (editToastMessage && editStatus) {
+      const toastType = editStatus > 204 ? 'error' : 'success';
+      const title = editStatus > 204 ? 'Erreur' : 'Confirmation';
+      toast({
+        title,
+        description: editToastMessage,
+        status: toastType,
+        duration: 5000,
+        isClosable: true,
+      });
+      dispatch(userChangeEditToastMessage(''));
+      dispatch(userChangeEditStatus(0));
+    }
+  }, [editToastMessage, editStatus]);
 
   return (
     <Flex className="main_container">
@@ -159,7 +187,16 @@ function Profil() {
                 <ChakraButton ref={cancelRef} onClick={onClose}>
                   Annuler
                 </ChakraButton>
-                <ChakraButton colorScheme="red" onClick={onClose} ml={3}>
+                <ChakraButton
+                  colorScheme="red"
+                  onClick={
+                    (onClose,
+                    () => {
+                      dispatch(userDeleteRequest(navigate));
+                    })
+                  }
+                  ml={3}
+                >
                   Supprimer
                 </ChakraButton>
               </AlertDialogFooter>

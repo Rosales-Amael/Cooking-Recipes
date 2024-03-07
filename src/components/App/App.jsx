@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import Navbar from '../Navbar/Navbar';
 import AddRecipeForm from '../AddRecipeForm/AddRecipeForm';
 import LoginForm from '../LoginForm/LoginForm';
@@ -10,11 +11,17 @@ import Search from '../Search/Search';
 import RecipeType from '../RecipeType/RecipeType';
 import AuthLayout from '../../layouts/AuthLayout';
 import GuestLayout from '../../layouts/GuestLayout';
+import ForgotPassword from '../ForgotPassword/ForgotPassword';
+import Loader from '../Loader/Loader';
+import ResetPassword from '../ResetPassword/ResetPassword';
 
 function App() {
+  const isAppLoading = useSelector((state) => state.loader.isLoading);
   return (
-    <div>
+    <div className="App">
       <Navbar />
+      {isAppLoading && <Loader />}
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/recherche" element={<Search />} />
@@ -41,6 +48,8 @@ function App() {
             path="/cree-mon-compte"
             element={<RegisterForm to="/creer-mon-compte" />}
           />
+          <Route path="mot-de-passe-oublie" element={<ForgotPassword />} />
+          <Route path="password-reset/:token" element={<ResetPassword />} />
         </Route>
       </Routes>
     </div>

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -37,12 +38,16 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutRequest } from '../../actions/logout';
+import serverPath from '../../utils/serverPath';
 
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = localStorage.getItem('USER_DATA');
+  const userState = useSelector((state) => state.user.user);
+  const user = JSON.parse(localStorage.getItem('USER_DATA'));
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {}, [userState]);
 
   return (
     <Box borderRadius="md">
@@ -69,13 +74,22 @@ function Navbar() {
             cursor="pointer"
             minW={0}
           >
-            <Avatar size="sm" bg="teal.500" />
+            <Avatar
+              size="sm"
+              bg="teal.500"
+              src={user ? serverPath + user.avatar : ''}
+            />
           </MenuButton>
           <MenuList>
-            <Link to="/profil">
-              <MenuItem>Profil</MenuItem>
-            </Link>
-            <MenuDivider />
+            {user && (
+              <>
+                <Link to="/profil">
+                  <MenuItem>Profil</MenuItem>
+                </Link>
+                <MenuDivider />
+              </>
+            )}
+
             {!user ? (
               <Link to="/connexion">
                 <MenuItem>Se connecter</MenuItem>
@@ -188,48 +202,54 @@ function Navbar() {
                 </Stack>
               </Box>
             </Link>
-            <Link to="/profil">
-              <Box pb={4}>
-                <Stack as="nav" spacing={4}>
-                  <Box
-                    onClick={onClose}
-                    px={2}
-                    py={1}
-                    rounded="md"
-                    _hover={{
-                      textDecoration: 'none',
-                      bg: 'gray.200',
-                    }}
-                  >
-                    <Flex>
-                      <LocalDiningIcon style={{ color: '#b0bec5' }} />
-                      <Text ml={2}>Mes recettes</Text>
-                    </Flex>
+            {user && (
+              <>
+                {' '}
+                <Link to="/profil">
+                  <Box pb={4}>
+                    <Stack as="nav" spacing={4}>
+                      <Box
+                        onClick={onClose}
+                        px={2}
+                        py={1}
+                        rounded="md"
+                        _hover={{
+                          textDecoration: 'none',
+                          bg: 'gray.200',
+                        }}
+                      >
+                        <Flex>
+                          <LocalDiningIcon style={{ color: '#b0bec5' }} />
+                          <Text ml={2}>Mes recettes</Text>
+                        </Flex>
+                      </Box>
+                    </Stack>
                   </Box>
-                </Stack>
-              </Box>
-            </Link>
-            <Link to="/profil">
-              <Box pb={4}>
-                <Stack as="nav" spacing={4}>
-                  <Box
-                    onClick={onClose}
-                    px={2}
-                    py={1}
-                    rounded="md"
-                    _hover={{
-                      textDecoration: 'none',
-                      bg: 'gray.200',
-                    }}
-                  >
-                    <Flex>
-                      <FavoriteIcon style={{ color: '#b0bec5' }} />
-                      <Text ml={2}>Recettes enregistrées</Text>
-                    </Flex>
+                </Link>
+                <Link to="/profil">
+                  <Box pb={4}>
+                    <Stack as="nav" spacing={4}>
+                      <Box
+                        onClick={onClose}
+                        px={2}
+                        py={1}
+                        rounded="md"
+                        _hover={{
+                          textDecoration: 'none',
+                          bg: 'gray.200',
+                        }}
+                      >
+                        <Flex>
+                          <FavoriteIcon style={{ color: '#b0bec5' }} />
+                          <Text ml={2}>Recettes enregistrées</Text>
+                        </Flex>
+                      </Box>
+                    </Stack>
                   </Box>
-                </Stack>
-              </Box>
-            </Link>
+                </Link>
+              </>
+            )}
+
             <Link to="/recherche">
               <Box mt={4}>
                 <Stack as="nav" spacing={4}>
@@ -246,22 +266,24 @@ function Navbar() {
                 </Stack>
               </Box>
             </Link>
-            <Link to="/creer-une-recette">
-              <Box pb={4}>
-                <Stack as="nav" spacing={4}>
-                  <Button
-                    variant="solid"
-                    colorScheme="teal"
-                    onClick={onClose}
-                    size="sm"
-                    mb={4}
-                    leftIcon={<AddIcon />}
-                  >
-                    Créer une recette
-                  </Button>
-                </Stack>
-              </Box>
-            </Link>
+            {user && (
+              <Link to="/creer-une-recette">
+                <Box pb={4}>
+                  <Stack as="nav" spacing={4}>
+                    <Button
+                      variant="solid"
+                      colorScheme="teal"
+                      onClick={onClose}
+                      size="sm"
+                      mb={4}
+                      leftIcon={<AddIcon />}
+                    >
+                      Créer une recette
+                    </Button>
+                  </Stack>
+                </Box>
+              </Link>
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>

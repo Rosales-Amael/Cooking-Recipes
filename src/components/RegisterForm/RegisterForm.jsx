@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useNavigate } from 'react-router-dom';
 import {
   Box,
   Flex,
@@ -23,7 +24,7 @@ import {
 
 function RegisterForm() {
   const dispatch = useDispatch();
-  const toast = useToast();
+  const navigate = useNavigate();
   const firstname = useSelector((state) => state.register.firstname);
   const email = useSelector((state) => state.register.email);
   const password = useSelector((state) => state.register.password);
@@ -43,7 +44,7 @@ function RegisterForm() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            dispatch(registerRequest());
+            dispatch(registerRequest(navigate));
           }}
         >
           <FormControl mb={4} isInvalid={errors.name}>

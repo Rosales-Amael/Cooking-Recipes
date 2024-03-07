@@ -1,7 +1,6 @@
 export const CHANGE_LOGIN_EMAIL = 'CHANGE_LOGIN_EMAIL';
 export const CHANGE_LOGIN_PASSWORD = 'CHANGE_LOGIN_PASSWORD';
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_CHANGE_ERRORS = 'LOGIN_CHANGE_ERRORS';
 
 export const changeLoginEmail = (newValue) => ({
@@ -17,10 +16,6 @@ export const changeLoginPassword = (newValue) => ({
 export const loginRequest = (history) => ({
   type: LOGIN_REQUEST,
   history,
-});
-
-export const loginSuccess = () => ({
-  type: LOGIN_SUCCESS,
 });
 
 export const loginChangeError = (newValue) => ({

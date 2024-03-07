@@ -3,8 +3,9 @@ import {
   CHANGE_REGISTER_EMAIL,
   CHANGE_REGISTER_PASSWORD,
   CHANGE_REGISTER_CONFIRM_PASSWORD,
-  REGISTER_SUCCESS,
-  REGISTER_ERRORS,
+  REGISTER_CHANGE_TOAST_MESSAGE,
+  REGISTER_CHANGE_STATUS,
+  REGISTER_CHANGE_ERRORS,
 } from '../actions/register';
 
 const initialState = {
@@ -14,6 +15,8 @@ const initialState = {
   confirmPassword: '',
   isAccountCreated: false,
   errors: [],
+  status: 0,
+  toastMessage: '',
 };
 
 const registerReducer = (state = initialState, action = {}) => {
@@ -45,19 +48,27 @@ const registerReducer = (state = initialState, action = {}) => {
       };
     }
 
-    case REGISTER_SUCCESS: {
-      return {
-        ...state,
-        isAccountCreated: true,
-      };
-    }
-
-    case REGISTER_ERRORS: {
+    case REGISTER_CHANGE_ERRORS: {
       return {
         ...state,
         errors: action.newValue,
       };
     }
+
+    case REGISTER_CHANGE_TOAST_MESSAGE: {
+      return {
+        ...state,
+        toastMessage: action.newValue,
+      };
+    }
+
+    case REGISTER_CHANGE_STATUS: {
+      return {
+        ...state,
+        status: action.newValue,
+      };
+    }
+
     default:
       return state;
   }

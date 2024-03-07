@@ -2,6 +2,10 @@
   font-size: 1.8rem;
   font-family: sans-serif;
 }
+
+#forget_password_text:hover {
+  text-decoration: underline;
+}
 #login_container {
   display: flex;
   height: 100vh;

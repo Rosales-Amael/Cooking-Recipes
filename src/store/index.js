@@ -7,6 +7,8 @@ import registerMiddleware from '../middlewares/registerMiddleware';
 import userMiddleware from '../middlewares/userMiddleware';
 import logoutMiddleware from '../middlewares/logoutMiddleware';
 import avatarMiddleware from '../middlewares/avatarMiddleware';
+import forgotPasswordMiddleware from '../middlewares/forgotPasswordMiddleware';
+import resetPasswordMiddleware from '../middlewares/resetPasswordMiddleware';
 
 const enhancer = composeWithDevTools(
   applyMiddleware(
@@ -14,7 +16,9 @@ const enhancer = composeWithDevTools(
     registerMiddleware,
     userMiddleware,
     logoutMiddleware,
-    avatarMiddleware
+    avatarMiddleware,
+    forgotPasswordMiddleware,
+    resetPasswordMiddleware
   )
 );
 

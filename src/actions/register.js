@@ -5,8 +5,9 @@ export const CHANGE_REGISTER_CONFIRM_PASSWORD =
   'CHANGE_REGISTER_CONFIRM_PASSWORD';
 
 export const REGISTER_REQUEST = 'REGISTER_REQUEST';
-export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
-export const REGISTER_ERRORS = 'REGISTER_ERRORS';
+export const REGISTER_CHANGE_ERRORS = 'REGISTER_CHANGE_ERRORS';
+export const REGISTER_CHANGE_TOAST_MESSAGE = 'REGISTER_CHANGE_TOAST_MESSAGE';
+export const REGISTER_CHANGE_STATUS = 'REGISTER_CHANGE_STATUS';
 
 export const changeRegisterFirstname = (newValue) => ({
   type: CHANGE_REGISTER_FIRSTNAME,
@@ -28,15 +29,22 @@ export const changeRegisterConfirmPassword = (newValue) => ({
   newValue,
 });
 
-export const registerRequest = () => ({
+export const registerRequest = (history) => ({
   type: REGISTER_REQUEST,
+  history,
 });
 
-export const registerSuccess = () => ({
-  type: REGISTER_SUCCESS,
+export const registerChangeErrors = (newValue) => ({
+  type: REGISTER_CHANGE_ERRORS,
+  newValue,
 });
 
-export const registerErrors = (newValue) => ({
-  type: REGISTER_ERRORS,
+export const registerChangeToastMessage = (newValue) => ({
+  type: REGISTER_CHANGE_TOAST_MESSAGE,
+  newValue,
+});
+
+export const registerChangeStatus = (newValue) => ({
+  type: REGISTER_CHANGE_STATUS,
   newValue,
 });

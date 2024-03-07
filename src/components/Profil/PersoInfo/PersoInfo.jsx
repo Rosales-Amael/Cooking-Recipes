@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Box,
   Flex,
@@ -10,9 +11,18 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react';
 import './PersoInfo.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  userChangeEmail,
+  userChangeName,
+  userEditRequest,
+} from '../../../actions/user';
 
 function PersoInfo() {
-  const user = JSON.parse(localStorage.getItem('USER_DATA'));
+  const dispatch = useDispatch();
+  const name = useSelector((state) => state.user.name);
+  const email = useSelector((state) => state.user.email);
+
   return (
     <>
       <h2>
@@ -26,30 +36,43 @@ function PersoInfo() {
       <AccordionPanel pb={4}>
         <Flex justifyContent="center" mt={12}>
           <Box borderRadius="md" bg="gray.100" w="100%" px={6}>
-            <Flex className="flexbox_edit_form">
-              <FormControl mb={4} mr={4} isRequired>
-                <FormLabel>Prénom</FormLabel>
-                <Input type="text" />
-              </FormControl>
-              <FormControl mb={4} isRequired>
-                <FormLabel>Nom</FormLabel>
-                <Input type="text" />
-              </FormControl>
-            </Flex>
+            <form
+              action=""
+              method="PATCH"
+              onSubmit={(e) => {
+                e.preventDefault();
+                dispatch(userEditRequest());
+              }}
+            >
+              <Flex className="flexbox_edit_form">
+                <FormControl mb={4} isRequired>
+                  <FormLabel>Nom</FormLabel>
+                  <Input
+                    type="text"
+                    value={name}
+                    onChange={(e) => {
+                      dispatch(userChangeName(e.target.value));
+                    }}
+                  />
+                </FormControl>
+              </Flex>
 
-            <Flex className="flexbox_edit_form">
-              <FormControl mb={4} mr={4} isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input type="email" />
-              </FormControl>
-              <FormControl mb={4} isRequired>
-                <FormLabel>Mot de passe</FormLabel>
-                <Input type="password" />
-              </FormControl>
-            </Flex>
-            <Button mt={2} w="100%" colorScheme="telegram">
-              Enregistrer
-            </Button>
+              <Flex className="flexbox_edit_form">
+                <FormControl mb={4} isRequired>
+                  <FormLabel>Email</FormLabel>
+                  <Input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      dispatch(userChangeEmail(e.target.value));
+                    }}
+                  />
+                </FormControl>
+              </Flex>
+              <Button type="submit" mt={2} w="100%" colorScheme="telegram">
+                Enregistrer
+              </Button>
+            </form>
           </Box>
         </Flex>
       </AccordionPanel>
